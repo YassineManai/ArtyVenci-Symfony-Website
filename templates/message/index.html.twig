@@ -1,0 +1,57 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Message index{% endblock %}
+
+{% block navbar %}
+   
+    {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}" >Auction</a></li>
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}"class="active" >Messenger</a></li> 
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <h1>Message index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idmsg   :   </th>
+                <th>Sender  :   </th>
+                <th>Receiver    :   </th>
+                <th>Iddis   :   </th>
+                <th>Content :   </th>
+                <th>Reaction    :   </th>
+                <th>Datasent    :   </th>
+                <th>actions :   </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.idmsg }}</td>
+                <td>{{ message.idsender }}</td>
+                <td>{{ message.idreceiver }}</td>
+                <td>{{ message.iddis }}</td>
+                <td>{{ message.content }}</td>
+                <td>{{ message.reaction }}</td>
+                <td>{{ message.vu }}</td>
+                <td>{{ message.datasent ? message.datasent|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_message_show', {'idmsg': message.idmsg , 'id_user': id_user }) }}">show</a>
+                    <a href="{{ path('app_message_edit', {'idmsg': message.idmsg , 'id_user': id_user }) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_message_new') }}">Create new</a>
+{% endblock %}

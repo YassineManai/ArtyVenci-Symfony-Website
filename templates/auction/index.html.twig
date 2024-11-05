@@ -1,0 +1,79 @@
+{% extends 'Home.html.twig' %}
+
+{% block head %}
+	<link rel="stylesheet" href="{{ asset('css/auctionStyle.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/style2.css') }}">
+{% endblock %}
+
+
+{% block navbar %}
+
+  {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}"class="active">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+	<link rel="stylesheet" href="{{ asset('css/auctionStyle.css') }}">
+
+	<div class="frame">
+    <!-- Contenu à placer dans le cadre -->
+    <a href="{{ path('app_auction_new', {'id_user':id_user} ) }}">Ajouter un Enchère</a>
+</div>
+
+<div class="frame1">
+    <!-- Contenu à placer dans le cadre -->
+    <a href="{{ path('auctions_search', {'id_user':id_user} ) }}">Trouver un Enchère</a>
+</div>
+
+	<div class="main-container">
+		<div class="row">
+			{% for item in auctions %}
+				{% set i = (auctions.currentPageNumber - 1) * auctions.getItemNumberPerPage() + loop.index %}
+				<div class="small-container">
+					<div class="wrapper">
+						<img src="{{asset ('img/explore/Auciton.jpg') }}" alt="explore image" class="banner-image">
+						<h1>
+							{{ item.nom }}</h1>
+						<p>FROM
+							{{ item.prixInitial }}DT
+							<br/>
+							TO
+							{{ item.prixFinal }}DT.</p>
+					</div>
+					<span class="explore-rating">
+						{% if AvgRating[i] != null %}
+							{{ AvgRating[i] }} Ratings <a href="#" class="fas fa-star s5"></a>
+						{% else %}
+							0 Rating
+							<i class="fa fa-star"></i>
+						{% endif %}
+					</span>
+				
+					<div class="button-wrapper">
+						<div class="button-wrapper">
+							<a href="{{ path('app_auction_show', {'idAuction': item.idAuction , 'id_user':id_user} ) }}" class="btn fill">Show Detail</a>
+						</div>
+					</div>
+				</div>
+				{% if loop.index % 3 == 0 and not loop.last %}
+				</div>
+				<div class="row">
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+	<div style= "display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    list-style: none;">{{ knp_pagination_render(auctions)}}</div>
+
+</html>{% endblock %}

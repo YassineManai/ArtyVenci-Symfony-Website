@@ -1,0 +1,60 @@
+{# templates/weather.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Information</title>
+    <style>
+        .CardContainerWeather {
+            position: relative;
+            height: auto; /* Set container height to fill the viewport */
+            display: flex;
+            justify-content: flex-end; /* Align items to the end of the container (right side) */
+            align-items: flex-start; /* Align items to the start of the container (top side) */
+        }
+        .cardWeather {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 20px; /* Set distance from top */
+            right: 20px; /* Set distance from right */
+        }
+
+        .place {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .temperature {
+            font-size: 36px;
+        }
+
+        .info {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="CardContainerWeather">
+        <div class="cardWeather">
+        {% if weather is defined %}
+            {% for w in weather %}
+                <div class="place">{{ w[0] }}</div>
+                <div class="temperature">{{ w[1] }} °C</div>
+                <div class="info">Latitude: {{ w[2] }}, Longitude: {{ w[3] }}</div>
+            {% endfor %}
+        {% else %}
+            <div class="place">{{ placeName }}</div>
+            <div class="temperature">{{ currentTemp }} °C</div>
+            <div class="info">Latitude: {{ latitude }}, Longitude: {{ longitude }}</div>
+            <div class="info">Humidity: {{ humidity }}%</div>
+            <div class="info">Clouds Description: {{ cloudsDescription }}</div>
+        {% endif %}
+        </div>
+    </div>
+</body>
+</html>

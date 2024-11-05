@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Join | ArtyVenci </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{asset('img/logo.png')}}" type="image/icon type">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'>
+<link rel="stylesheet" href="{{asset('css/style.css')}}" >
+<link rel="stylesheet" href="{{asset('css/imaegimport.css')}}" >
+
+</head>
+
+<body>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <div id='stars'></div>
+  <div id='stars2'></div>
+  <div id='stars3'></div>
+
+
+  <body id="particles-js"></body>
+  <div class="animated bounceInDown">
+    <div class="container">
+      <span class="error animated tada" id="msg"></span>
+       <img src="{{asset('img/Closepage.png')}}" alt="ArtyVnci" style="width: 10%;position: absolute;top: 2%;right: 2%;" >
+       <a href="{{path('signup2')}}"><img src="{{asset('img/return.png')}}" alt="ArtyVnci" style="width: 8%;position: absolute;top: 3%;left: 4%;" ></a>
+      
+       <form name="form1" class="box" {{ form_start(form) }}>
+    <img src="{{ asset('img/logo.png') }}" alt="ArtyVnci" style="width: 35%;">
+    <h5>Sign in to your account.</h5>
+    <img src="{{asset('img/pagination3.png')}}" alt="ArtyVnci" style="position: fixed;width: 10%;top: 27%;right: 45%;">
+ 
+<div>
+    <img src="{{ asset('img/userprofile.png') }}" id="output" width="200" />
+</div>
+{{ form_widget(form.imageurl, {'id': 'imageurl'}) }}
+<br>
+<br>
+
+
+<script>
+    const imageUrlInput = document.getElementById('imageurl');
+    const imageOutput = document.getElementById('output');
+
+    imageUrlInput.addEventListener('change', function() {
+        // Get the value of the image input
+        const imageName = this.value.replace(/^.*[\\\/]/, ''); // Remove path leaving only the filename
+
+        // Construct the full URL of the image
+        const imageUrl = "{{ asset('img/testimonials/') }}" + imageName;
+
+        // Set the src attribute of the image
+        imageOutput.src = imageUrl;
+    });
+</script>
+
+
+
+
+
+
+
+
+    
+    {{ form_row(form.Done, {'attr': {'class': 'btn2', 'value': 'Sign in' }}) }}
+   
+</form >
+      
+
+
+
+    
+
+
+      
+    </div>
+
+
+  </div>
+
+
+ 
+  <script src='https://cldup.com/S6Ptkwu_qA.js'></script><script  src="{{asset('js/script.js')}}"></script>
+    <script src='https://cldup.com/S6Ptkwu_qA.js'></script><script  src="{{asset('js/importImg.js')}}"></script>
+
+</body>
+
+</html>

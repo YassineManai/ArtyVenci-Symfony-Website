@@ -1,0 +1,53 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}Discussion{% endblock %}
+
+{% block navbar %}
+   
+     {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}"class="active">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <h1>Discussion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Iddis</th>
+                <th>Idreciever</th>
+                <th>Idsender</th>
+                <th>Sig</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for discussion in discussions %}
+            <tr>
+                <td>{{ discussion.iddis }}</td>
+                <td>{{ discussion.idreciever }}</td>
+                <td>{{ discussion.idsender }}</td>
+                <td>{{ discussion.sig }}</td>
+                <td>
+                    <a href="{{ path('app_discussion_show', {'iddis': discussion.iddis ,  'id_user': id_user }) }}">show</a>
+                    <a href="{{ path('app_discussion_edit', {'iddis': discussion.iddis , 'id_user': id_user }) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button onclick="window.location.href='{{ path('app_discussion_new') , { 'id_user': id_user } }}'" class="btn">Create new</button>
+    <a href="{{ path('app_discussion_new') , { 'id_user': id_user } }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}New Message{% endblock %}
+
+
+{% block navbar %}
+   
+    {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}" >Auction</a></li>
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}"class="active" >Messenger</a></li> 
+    {% endif %}
+{% endblock %}
+
+
+
+{% block body %}
+    <h1>Create new Message</h1>
+
+    {{ include('message/_form.html.twig') }}
+
+    <a href="{{ path('app_message_index') }}">back to list</a>
+{% endblock %}

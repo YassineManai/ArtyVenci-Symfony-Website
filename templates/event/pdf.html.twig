@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .event {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .event-img {
+            width: 50%;
+            height: auto;
+            margin-right: 15px;
+            float: left;
+        }
+        .event-details {
+            overflow: hidden;
+        }
+        .event-title {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .event-description {
+            font-size: 16px;
+            color: #666;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Event Catalog</h1>
+            <p>Check out our upcoming events!</p>
+        </div>
+        
+        {% for event in events %}
+        <div class="event">
+            
+            <div class="event-details">
+                <div class="event-title">{{ event.eName }}</div>
+                
+                <div class="event-date">Date: {{ event.eDate|date('M d, Y') }}</div>
+                <div class="event-location">Location: {{ event.place }}</div>
+                 <div class="event-location">Price: {{ event.ticketPrice }} DT</div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        {% endfor %}
+        
+        <div class="footer">
+            Our catalogue for &ndash; {{ "now"|date("Y-m-d H:i:s") }}
+        </div>
+    </div>
+</body>
+</html>

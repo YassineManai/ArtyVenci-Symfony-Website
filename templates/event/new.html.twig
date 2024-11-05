@@ -1,0 +1,24 @@
+{% extends 'Admin.html.twig' %}
+
+{% block title %}New Event{% endblock %}
+
+{% block content %}
+<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex">
+							<div class="w-100">
+								<div class="row">
+									
+    <h1>Create new Event</h1>
+
+    {{ include('event/_form.html.twig') }}
+
+    <a href="{{ path('app_event_index') }}">back to list</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+{% endblock %}

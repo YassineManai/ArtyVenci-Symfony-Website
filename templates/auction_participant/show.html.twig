@@ -1,0 +1,34 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}AuctionParticipant{% endblock %}
+
+{% block body %}
+    <h1>AuctionParticipant</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Prix</th>
+                <td>{{ auction_participant.prix }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ auction_participant.date ? auction_participant.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Love</th>
+                <td>{{ auction_participant.love }}</td>
+            </tr>
+            <tr>
+                <th>Rating</th>
+                <td>{{ auction_participant.rating }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_auction_participant_index') }}">back to list</a>
+
+    <a href="{{ path('app_auction_participant_edit', {'idParticipant': auction_participant.idParticipant.idUser}) }}">edit</a>
+
+    {{ include('auction_participant/_delete_form.html.twig') }}
+{% endblock %}

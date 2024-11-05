@@ -1,0 +1,11 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}New AuctionParticipant{% endblock %}
+
+{% block body %}
+    <h1>Create new AuctionParticipant</h1>
+
+    {{ include('auction_participant/_form.html.twig') }}
+
+    <a href="{{ path('app_auction_participant_index') }}">back to list</a>
+{% endblock %}

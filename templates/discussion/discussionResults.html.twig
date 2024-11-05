@@ -1,0 +1,85 @@
+{% block body %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .discussion-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .discussion-item {
+            border: 2px solid rgba(39, 167, 118, 0.8);
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+            background-color: rgb(255, 240, 212);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .discussion-item:hover {
+            transform: scale(1.05);
+        }
+
+        .user-info {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-info img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .username {
+            font-weight: bold;
+        }
+
+    </style>
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+
+                    {% if discussions[0] is not null %}
+                        {% if discussions[0].idsender == 0  %}
+                            <h2> Aucune discussion trouvée </h2>
+                        {% else %}
+
+                            <div class="discussion-wrapper">
+                                {% for discussion in discussions %}
+                                    <div class="discussion-item">
+                                        <a href="{{ path('app_discussion_show_messages', {'iddis': discussion.iddis , 'id_user': id_user }) }}" class="user-info">
+                                            <img src="{{ asset('img/discussion/homme.png') }}" alt="Image alternative">
+                                            <p class="username">{{ discussion.receiver ? discussion.receiver.username : 'Destinataire inconnu' }}</p>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero Section -->
+
+{% endblock %}

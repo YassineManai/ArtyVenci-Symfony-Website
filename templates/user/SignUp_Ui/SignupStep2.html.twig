@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Join | ArtyVenci </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{asset('img/logo.png')}}" type="image/icon type">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'>
+<link rel="stylesheet" href="{{asset('css/style.css')}}" >
+
+
+
+</head>
+
+<body>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <div id='stars'></div>
+  <div id='stars2'></div>
+  <div id='stars3'></div>
+
+
+  <body id="particles-js"></body>
+  <div class="animated bounceInDown">
+    <div class="container" style="
+    height: 690px;">
+    <span class="error animated tada" id="msg" style="top: 21%;" ></span>
+     <img src="{{asset('img/Closepage.png')}}" alt="ArtyVnci" style="width: 10%;position: absolute;top: 2%;right: 2%;" >
+     <a href="{{path('signup')}}"><img src="{{asset('img/return.png')}}" alt="ArtyVnci" style="width: 8%;position: absolute;top: 3%;left: 4%;" ></a>
+      <form name="form1"  class="box" onsubmit = "return check()" action="{{ path('signup3',{'username': 'example_username', 'email': 'example_email' , 'dob':'example_dob'})}}">
+        <img src="{{asset('img/logo.png')}}" alt="ArtyVnci"style="width: 35%;">
+        <h5>Join ArtyVenci</h5>
+      
+         <img src="{{asset('img/pagination2.png')}}" alt="ArtyVnci" style="position: fixed;width: 10%;top: 27%;right: 45%;">
+          
+          <!-- Other fields -->
+
+        <input type="hidden" name="username" value={{username}}>
+        <input type="hidden" name="email" value={{email}}>
+        <input type="hidden" name="password" value = {{password}}>
+         <input type="hidden" name="Role" value = {{Role}}>
+
+         <!-- Other fields -->
+
+        <input type="text" name="FirstName" placeholder="FirstName" id="firstname" autocomplete="off">
+        <input type="text" name="LastName" placeholder="LastName" id="lastname" autocomplete="off">
+        <input type="text" name="adress" placeholder="Adress"  id="adress" autocomplete="off">
+        <input type="text" name="Phone" placeholder="Phone" id="phone" autocomplete="off">
+       <input type="date" name="Phone1" placeholder="Select Birthday " id="dateInput" autocomplete="off" 
+       style="
+    display: block;
+    margin: 20px auto;
+    background: #262e49;
+    border: 0;
+    border-radius: 5px;
+    padding: 14px 10px;
+    width: 320px;
+    outline: none;
+    color: #d6d6d6;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+"> 
+    
+  
+
+    
+        <div class="box">
+          <select aria-placeholder="Select your Gender.." name="Gender" id="Gender" style="
+    width: 340px;
+">
+           <option value="" disabled selected>Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+
+
+        <input type="submit" value="Next" class="btn2" style="
+    top: 89%;">
+      </form>
+
+
+      
+    </div>
+
+
+  </div>
+
+
+ 
+  <script src='https://cldup.com/S6Ptkwu_qA.js'></script><script  src="{{asset('js/Signup.js')}}"></script>
+  
+
+</body>
+
+</html>

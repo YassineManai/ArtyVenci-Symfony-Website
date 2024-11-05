@@ -1,2 +1,2 @@
-# ArtyVenci-Symfony-Website
-ArtyVenci-Symfony-Website
+# Sprint-Web
+Sprint-Web

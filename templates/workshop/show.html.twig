@@ -1,0 +1,38 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}Workshop{% endblock %}
+
+{% block body %}
+    <h1>Workshop</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdWorkshop</th>
+                <td>{{ workshop.idWorkshop }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ workshop.title }}</td>
+            </tr>
+            <tr>
+                <th>Details</th>
+                <td>{{ workshop.details }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ workshop.image }}</td>
+            </tr>
+            <tr>
+                <th>IdEvent</th>
+                <td>{{ workshop.idEvent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_workshop_index') }}">back to list</a>
+
+    <a href="{{ path('app_workshop_edit', {'idWorkshop': workshop.idWorkshop}) }}">edit</a>
+
+    {{ include('workshop/_delete_form.html.twig') }}
+{% endblock %}

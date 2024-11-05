@@ -1,0 +1,31 @@
+
+{{ form_start(form) }}
+<style>
+    .custom-table {
+        margin-left: 6rem;
+    }
+</style>
+<table class="custom-table">
+    <tr>
+        <td>{{ form_label(form.title) }}</td>
+        <td>{{ form_widget(form.title) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.description) }}</td>
+        <td>{{ form_widget(form.description) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.forsale) }}</td>
+        <td>{{ form_widget(form.forsale) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.price) }}</td>
+        <td>{{ form_widget(form.price) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.productimage) }}</td>
+        <td>{{ form_widget(form.productimage) }}</td>
+    </tr>
+</table>
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,27 @@
+{# templates/auction/new.html.twig #}
+{% extends 'Home.html.twig' %}
+{% block navbar %}
+   
+  {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}"class="active">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        
+    {% endif %}
+{% endblock %}
+{% block title %}Nouvelle Enchère{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+    <h1>Créer une nouvelle enchère</h1>
+    {#{{ include('auction/_form.html.twig') }}#}
+    {{form(form)}}
+    <a href="{{ path('app_auction_index' , {'id_user' : id_user }) }}">Retour à la liste</a>
+{% endblock %}
+    

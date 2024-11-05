@@ -1,0 +1,73 @@
+<style>
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.card-header h2 {
+  margin: 0;
+}
+
+.card-body p {
+  margin: 0;
+  color : black;
+}
+
+.card-body span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #888;
+}
+
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.card-meta span:first-child {
+	margin : 0 10px 0 0;
+}
+.card-header h2 {
+    color:black;
+}
+
+.card-body {
+  text-align: left; 
+}
+
+.titleButt2 {
+  color:black;
+  margin : 0px 10px 0px 10px;
+  text-align : left;
+  padding : 0px;
+}
+
+
+
+</style>
+<div class="card">
+  <div class="card-header">
+  {% if idu is defined %}
+    <h2><a class="titleButt2" href="{{path('app_list_posts_by_forum_user',{'idf':f.getIdForum , 'idu':idu.idUser })}}">{{ f.title }}</a></h2>
+  {% else %}
+    <h2><a class="titleButt2" href="{{path('app_list_posts_by_forum',{'idf':f.getIdForum})}}">{{ f.title }}</a></h2>
+  {% endif %}
+    
+    <div class="card-meta">
+      <span>Posts : {{ f.repliesNumber }}</span>
+      <span>Date : {{ f.getDate| date("d/m/Y") }}</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <p>{{ f.description }}</p>
+  </div>
+</div>

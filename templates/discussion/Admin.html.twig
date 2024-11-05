@@ -1,0 +1,103 @@
+{% extends 'Admin.html.twig' %}
+{% block sidebar  %}
+	<section id="sidebar">
+		<a href={{path('Admin')}} class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">ArtyVenci_Admin</span>
+		</a>
+		<ul class="side-menu top">
+			<li>
+				<a href="{{path('Admin')}}">
+					<i class='bx bx-user'></i>
+					<span class="text">Users</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{path('AdminProds')}}">
+					<i class='bx bxl-product-hunt'></i>
+					<span class="text">Products</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{path('ForumsAdmin')}}">
+					<i class='bx bx-message-square-detail'></i>
+					<span class="text">Forums</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bx-calendar-event'></i>
+					<span class="text">Events</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('AdminAuc') }}">
+					<i class='bx bx-edit-alt'></i>
+					<span class="text">Auction</span>
+				</a>
+			</li>
+			<li  class="active" >
+				<a href="{{ path('app_list_disc') }}">
+					<i class='bx bx-chat'></i>
+					<span class="text">Discussion</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog'></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href={{path('login')}} class="logout">
+					<i class='bx bxs-log-out-circle'></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+{% endblock %}
+
+{% block content %}
+    <li style="padding: 24px; background: var(--light); border-radius: 20px;">
+        <div class="head-title">
+            <div class="left">
+                <h1 style="font-size: 30px;font-weight: 600;margin-bottom: 10px;color: var(--dark);">Liste des Discussions Signalées</h1>
+            </div>
+            <a href={{path('Block_Users')}} style="color: var(--dark);font-size: 20px;font-weight: 600;">Blocked Users<img src="{{asset('img/Blocked.png')}}" style="width: 30px;margin-left: 10px;position: relative;top: 5px;"></a>
+        </div>
+        <div class="table-wrapper">
+            <table class="fl-table" id="userTable">
+                <thead>
+                    <tr>
+                        <th style="background:#144CCC; text-align: center;">ID Discussion</th>
+                        <th style="background:#144CCC; text-align: center;">Receiver</th>
+                        <th style="background:#144CCC; text-align: center;">Sender</th>
+                        <th style="background:#144CCC; text-align: center;">Raison de Signalement</th>
+                        <th style="background:#144CCC; text-align: center;">Annuler le Signalement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for discussion in discussions %}
+                        <tr>
+                            <td style="text-align: center;">{{ discussion.iddis }}</td>
+                            <td style="text-align: center;">{{ discussion.receiver.username }}</td>
+                            <td style="text-align: center;">{{ discussion.idsender }}</td>
+                            <td style="text-align: center;">{{ discussion.sig }}</td>
+                            <td style="text-align: center;"><a href="{{ path('app_discussion_annul_signal', {'iddis': discussion.iddis}) }}"><img src="{{ asset('img/discussion/annulerSig.png') }}" alt="Annuler" width="30" height="30"></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </li>
+</div>
+</li>
+</main>
+<!-- MAIN -->
+</div>
+</li>
+{% endblock %}

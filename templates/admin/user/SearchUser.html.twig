@@ -1,0 +1,183 @@
+{% extends 'Admin.html.twig' %}
+
+
+
+{% block path  %} 
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="{{path('Admin')}}">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a  href="{{path('Admin')}}">Home</a>
+						</li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+							<a class="active" href="Admin">Blocked Users</a>
+						</li>
+					</ul>
+				</div>
+		{% endblock %}
+
+
+{% block content %}
+<li style="
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+">
+   
+
+<div class="head-title">
+			<div class="left">
+					<h1 style="font-size: 30px;font-weight: 600;margin-bottom: 10px;color: var(--dark);
+                   ">Table of Blocked Users</h1>
+					
+				</div>
+
+                <form action="#">
+				<div class="form-input" style="display: flex;align-items: center;height: 36px;width: 500px;;
+">
+					<input type="search" id="searchInput" placeholder="Search..." style="flex-grow: 1;padding: 0 16px;height: 100%;border: none;background: var(--grey);border-radius: 36px 0 0 36px;outline: none;width: 100%;color: var(--dark);
+">
+					<button type="submit" id="searchButton" class="search-btn" style=" width: 36px; height: 100%; display: flex; justify-content: center; align-items: center; background: var(--blue); color: var(--light); font-size: 18px; border: none; outline: none; border-radius: 0 36px 36px 0;
+    cursor: pointer;
+"><i class='bx bx-search'style="
+   
+" ></i></button>
+				</div>
+			</form>
+
+              <select aria-placeholder="Select your role.." name="role" id="role" style="background-color: #262e49; color: #fafafa; padding: 12px; border: none; font-size: 20px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); appearance: button; outline: none; border-radius: 5px; background-color: #144CCC; margin-right: 70px;">
+    <option style="padding: 30px;" value="" disabled selected>Select your role</option>
+    <option style="padding: 30px;" value="member">Member</option>
+    <option style="padding: 30px;" value="artist">Artist</option>
+</select>
+
+
+
+
+				
+			
+
+
+                </div>
+				  
+      
+        
+
+<div class="table-wrapper">
+   <table class="fl-table" id="userTable">
+    <!-- Table header -->
+    <thead>
+        <tr>
+            <th style="background:#144CCC;"></th>
+            <th style="background:#144CCC;">Username</th>
+            <th style="background:#144CCC;">Email</th>
+            <th style="background:#144CCC;">Role</th>
+            <th style="background:#144CCC;">FirstName</th>
+            <th style="background:#144CCC;">LastName</th>
+            <th style="background:#144CCC;">Address</th>
+            <th style="background:#144CCC;">Phone</th>
+            <th style="background:#144CCC;">Gender</th>
+            <th style="background:#144CCC;">Birthday</th>
+            <th style="background:#144CCC;"></th>
+        </tr>
+    </thead>
+    <!-- Table body -->
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td style=" width: 10px;">  <a href={{path('userdetail',{id:user.idUser})}}><img src="{{asset('img/UserIcon.png')}}" title="View user"></a></td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.firstname}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.adress}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.dob}}</td>
+            <td style=" width: 10px;">
+                <a href={{path('user_delete',{id:user.idUser})}} onclick="return confirm('Are you sure you want to delete this User ?')"><img src="{{asset('img/deleteUser.png')}} " title="Delete the user"></a>
+                 <a href={{path('user_Unblock',{id:user.idUser})}} onclick="return confirm('Are you sure you want to Unblock this User ?')"><img src="{{asset('img/Valid.png')}}" title="Unblock user" 
+></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+      
+             <tbody>
+	  	
+         </table>
+	
+	             </div>
+            </li>
+
+
+			
+		</main>
+		<!-- MAIN -->
+
+
+
+
+	
+</div>
+	
+	</li> 
+
+    <script>
+    // te5ith element
+    const roleSelect = document.getElementById('role');
+    const userTable = document.getElementById('userTable');
+
+    //fonction lkol fil kol 
+    roleSelect.addEventListener('change', function() {
+        // el valeur mil select
+        const selectedRole = this.value;
+        // yboucli les ligne mte3 tableaux
+        const rows = userTable.getElementsByTagName('tr');
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const roleCell = row.cells[3]; //hethi el column eli feha 'role ' 
+            if (roleCell.textContent.toLowerCase() === selectedRole || selectedRole === '') {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    });
+
+
+    document.getElementById('searchButton').addEventListener('click', function() {
+    // Get the search input value
+    var searchValue = document.getElementById('searchInput').value.toLowerCase();
+
+    // Get all table rows
+    var rows = document.querySelectorAll('#userTable tbody tr');
+
+    // Loop through each row
+    rows.forEach(function(row) {
+        // Get the username cell value
+        var username = row.cells[1].textContent.toLowerCase();
+
+        // Check if the username contains the search value
+        if (username.includes(searchValue) || searchValue === '') {
+            // Show the row if it matches the search value or search value is empty
+            row.style.display = '';
+        } else {
+            // Hide the row if it doesn't match the search value
+            row.style.display = 'none';
+        }
+    });
+});
+
+</script>
+{% endblock %}

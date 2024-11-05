@@ -1,0 +1,39 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}AuctionParticipant index{% endblock %}
+
+{% block body %}
+    <h1>AuctionParticipant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Prix</th>
+                <th>Date</th>
+                <th>Love</th>
+                <th>Rating</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for auction_participant in auction_participants %}
+            <tr>
+                <td>{{ auction_participant.prix }}</td>
+                <td>{{ auction_participant.date ? auction_participant.date|date('Y-m-d') : '' }}</td>
+                <td>{{ auction_participant.love }}</td>
+                <td>{{ auction_participant.rating }}</td>
+                <td>
+                    <a href="{{ path('app_auction_participant_show', {'idParticipant': auction_participant.idParticipant.idUser}) }}">show</a>
+                    <a href="{{ path('app_auction_participant_edit', {'idParticipant': auction_participant.idParticipant.idUser}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_auction_participant_new') }}">Create new</a>
+{% endblock %}

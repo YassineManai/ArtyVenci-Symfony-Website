@@ -1,0 +1,67 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Message{% endblock %}
+
+{% block navbar %}
+   
+    {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}" >Auction</a></li>
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}"class="active" >Messenger</a></li> 
+    {% endif %}
+{% endblock %}
+
+
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mt-4" style="color: rgba(39, 167, 118, 0.8) ;">Message</h1>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Idmsg</th>
+                            <td>{{ message.idmsg }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Idsender</th>
+                            <td>{{ message.idsender }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Iddis</th>
+                            <td>{{ message.iddis }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Content</th>
+                            <td>{{ message.content }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Reaction</th>
+                            <td>{{ message.reaction }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Vu</th>
+                            <td>{{ message.vu }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Datasent</th>
+                            <td>{{ message.datasent ? message.datasent|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('app_message_index' , { 'id_user': id_user }) }}" class="btn btn-secondary">Retour à la liste</a>
+            <a href="{{ path('app_message_edit', {'idmsg': message.idmsg , 'id_user': id_user}) }}" class="btn btn-primary">Modifier</a>
+        </div>
+
+        {{ include('message/_delete_form.html.twig') }}
+    </div>
+    
+{% endblock %}

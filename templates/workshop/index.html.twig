@@ -1,0 +1,128 @@
+{% extends 'Admin.html.twig' %}
+
+{% block title %}Workshops{% endblock %}
+
+
+
+
+
+{% block content %}
+<li style="
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+">
+<div class="head-title">
+			<div class="left">
+					<h1 style="
+                                font-size: 30px;
+                                font-weight: 600;
+                                margin-bottom: 10px;
+                                color: var(--dark);
+                            ">Table of Forums</h1>
+					
+				</div>
+         <form action="{{ path('app_event_search') }}" method="POST">
+				<div class="form-input" style="display: flex;align-items: center;height: 36px;width: 500px;;
+">
+					<input type="search" name="search" placeholder="Search..." style="flex-grow: 1;padding: 0 16px;height: 100%;border: none;background: var(--grey);border-radius: 36px 0 0 36px;outline: none;width: 100%;color: var(--dark);
+">
+					<buttontype="submit" class="search-btn" style=" width: 36px; height: 100%; display: flex; justify-content: center; align-items: center; background: var(--blue); color: var(--light); font-size: 18px; border: none; outline: none; border-radius: 0 36px 36px 0;
+    cursor: pointer;
+"><i class='bx bx-search'style="
+   
+" ></i></button>
+				</div>
+			</form>
+               <a href="{{ path('app_event_new')}}">Create new</a>
+                </div>
+              
+				
+
+<div class="table-wrapper">
+    <table class="fl-table" id="userTable">
+        <thead>
+		
+        <tr>
+		    
+            <th style="background:#144CCC;">Title</th>
+            <th style="background:#144CCC;">Details</th>
+            <th style="background:#144CCC;">Image</th>
+            <th style="background:#144CCC;">Action</th>
+			
+        </tr>
+        </thead>
+
+
+
+
+		
+        <tbody>
+       {% for workshop in workshops %}
+            <tr>
+                
+                <td>{{ workshop.title }}</td>
+                <td>{{ workshop.details }}</td>
+                <td>><img src="{{asset(workshop.image)}}" width="100" height="150" /></td>
+                
+                <td>
+                   
+                    <a href="{{ path('app_workshop_edit', {'idWorkshop': workshop.idWorkshop}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+	</table>
+    
+	
+	             </div>
+            </li>
+
+
+			
+		</main>
+		
+ 
+
+
+
+
+	
+</div>
+	
+	</li> 
+
+    <script>
+    
+		///////////////////TESTING//////////////////////////
+	    // te5ith element
+		const userTable = document.getElementById('userTable');
+
+		document.getElementById('searchButton').addEventListener('click', function() {
+		// Get the search input value
+		var searchValue = document.getElementById('searchInput').value.toLowerCase();
+
+		// Get all table rows
+		var rows = document.querySelectorAll('#userTable tbody tr');
+
+		// Loop through each row
+		rows.forEach(function(row) {
+			// Get the username cell value
+			var username = row.cells[1].textContent.toLowerCase();
+
+			// Check if the username contains the search value
+			if (username.includes(searchValue) || searchValue === '') {
+				// Show the row if it matches the search value or search value is empty
+				row.style.display = '';
+			} else {
+				// Hide the row if it doesn't match the search value
+				row.style.display = 'none';
+			}
+		});
+	});
+    </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!-- character_template.html.twig -->
+<link rel="stylesheet" href="{{ asset('css/apiStyle.css') }}">
+
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-xl-6 col-md-12">
+                <div class="card user-card-full">
+                    <div class="row m-l-0 m-r-0">
+                        <div class="col-sm-4 bg-c-lite-green user-profile">
+                            <div class="card-block text-center text-white">
+                                <div class="m-b-25">
+                                    <!-- Replace 'USER-PROFILE-IMAGE-URL' with character image URL -->
+                                </div>
+                                <!-- Use character data to display name, height, mass, etc. -->
+                                <h6 class="f-w-600">{{ character.name }}</h6>
+                                <p>{{ character.gender }}</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="card-block">
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">Height</p>
+                                        <h6 class="text-muted f-w-400">{{ character.height }}</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">Mass</p>
+                                        <h6 class="text-muted f-w-400">{{ character.mass }}</h6>
+                                    </div>
+                                </div>
+                                <!-- Add more character details as needed -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+
+
+<div class="form-group">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+         <span style="color:red;">{{ form_errors(form.title)}}</span>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.details) }}
+        {{ form_widget(form.details, {'attr': {'class': 'form-control'}}) }}
+         <span style="color:red;">{{ form_errors(form.details)}}</span>
+    </div>
+
+   
+     <div class="form-group">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+    <span style="color:red;">{{ form_errors(form.image)}}</span>
+    </div>
+
+     
+
+   
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+</style>
+
+

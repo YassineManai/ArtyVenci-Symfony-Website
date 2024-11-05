@@ -1,0 +1,30 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}Hello ForumController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    {% block navbar %}
+		{% set id_user = idu.idUser %}
+		{% if id_user %}
+			<li><a href="{{path('app_product_index',{'id_user': id_user })}}"class="active" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+		{% endif %}
+	{% endblock %}
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/Users/xx-ya/Desktop/Sprint-Web-Dev/src/Controller/ForumController.php'|file_link(0) }}">src/Controller/ForumController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/Users/xx-ya/Desktop/Sprint-Web-Dev/templates/forum/index.html.twig'|file_link(0) }}">templates/forum/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}

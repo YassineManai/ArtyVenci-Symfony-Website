@@ -1,0 +1,41 @@
+/* styles.css */
+
+/* Style pour la liste des messages */
+.message-container {
+    margin-top: 20px;
+}
+
+.message-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.message-container li {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+/* Style pour le formulaire de création de message */
+.message-form {
+    margin-top: 20px;
+}
+
+.message-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.message-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message-form input[type="submit"]:hover {
+    background-color: #45a049;
+}

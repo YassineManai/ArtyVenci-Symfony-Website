@@ -1,0 +1,111 @@
+{# templates/search.html.twig #}
+{% extends 'Home.html.twig' %}
+
+{% block title %}Search{% endblock %}
+    {% block navbar %}
+		{% set id_user = idu.idUser %}
+		{% if id_user %}
+			<li><a href="{{path('app_product_index',{'id_user': id_user })}}"class="active" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li> 
+		{% endif %}
+	{% endblock %}
+{% block body %}
+    <style>
+        #searchForm {
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+        }
+
+        #searchInput {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border: none;
+            border-bottom: 2px solid #ddd;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #searchInput:focus {
+            border-color: #007bff;
+        }
+
+        ::placeholder {
+            color: #ccc;
+        }
+
+    </style>
+	<!-- ======= Hero Section ======= -->
+	<section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+                    <h2><a class="titleButt2" href="{{path('app_lists_forum_user',{'idu':idu.idUser})}}"> Go Back All Forums</a></h2>
+					<form id="searchForm">
+				        <input type="text" id="searchInput" autocomplete="off" name="q" placeholder="Enter your search query">
+			        </form>
+                    
+                    <div id="searchResults">
+                        
+                    </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Hero Section -->
+
+	<html lang="en">
+		
+		<body>
+			
+
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+			<script>
+				$(document).ready(function () {
+var isRequestPending = false;
+var throttleTimeout;
+$(document).on("keyup", "#searchInput", function () {
+var input = $(this).val().trim();
+
+if (! isRequestPending) {
+isRequestPending = true;
+}
+
+// Send AJAX request
+$.ajax({
+url: "{{ path('forums_search_res',{'idu':idu.idUser}) }}",
+method: "GET",
+data: {
+query: input,
+},
+timeout: 5000,
+success: function (data) {
+$("#searchResults").html(data); // Update the HTML content
+},
+error: function (xhr, status, error) {
+console.error("AJAX request failed. Status:", status);
+console.error("Error:", error);
+console.error("Response Text:", xhr.responseText);
+// Optionally, you can handle the error here or show an error message to the user
+}
+});
+
+clearTimeout(throttleTimeout); // Clear any existing timeout
+throttleTimeout = setTimeout(function () {
+isRequestPending = false;
+}, 1000);
+});
+});
+			</script>
+
+		</body>
+	</html>
+{% endblock %}

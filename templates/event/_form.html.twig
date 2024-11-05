@@ -1,0 +1,106 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+
+
+<div class="form-group">
+        {{ form_label(form.eName) }}
+        {{ form_widget(form.eName, {'attr': {'class': 'form-control'}}) }}
+         <span style="color:red;">{{ form_errors(form.eName)}}</span>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.place) }}
+        {{ form_widget(form.place, {'attr': {'class': 'form-control'}}) }}
+         <span style="color:red;">{{ form_errors(form.place)}}</span>
+    </div>
+
+<div class="map-container">
+    <div id="map"></div>
+    <span id="map-address" style="color:red;"></span>
+</div>
+    <div class="form-group">
+        {{ form_label(form.eDate) }}
+        {{ form_widget(form.eDate, {'attr': {'class': 'form-control'}}) }}
+    <span style="color:red;">{{ form_errors(form.eDate)}}</span>
+    </div>
+     <div class="form-group">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+    <span style="color:red;">{{ form_errors(form.image)}}</span>
+    </div>
+     <div class="form-group">
+        {{ form_label(form.ticketPrice) }}
+        {{ form_widget(form.ticketPrice, {'attr': {'class': 'form-control'}}) }}
+    <span style="color:red;">{{ form_errors(form.ticketPrice)}}</span>
+    </div>
+     
+
+   
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+<style>
+    .form-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var marker = L.marker([51.5, -0.09], { draggable: true }).addTo(map);
+
+    map.on('click', function(event) {
+        marker.setLatLng(event.latlng);
+        updateAddress(event.latlng);
+    });
+
+    function updateAddress(latlng) {
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latlng.lat}&lon=${latlng.lng}&format=json`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('event_place').value = data.display_name;
+                document.getElementById('map-address').textContent = data.display_name;
+            });
+    }
+</script>
+
+<style>
+    .map-container {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+
+    #map-address {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+    }
+</style>
+
+

@@ -1,0 +1,104 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}Events index{% endblock %}
+ {% block navbar %}
+   
+   {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+		<li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}"class="active">Events</a></li> 
+         <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+    {% endif %}
+    {% endblock %}
+{% block body %}
+ <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+         
+ <div id="pricing" class="pricing">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h2>Our<strong class="black"> Events</strong></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for event in events %}
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12" >
+                        <div class="pricing_box">
+                            <img src="{{ asset(event.image) }}" width="200" height="250" />
+                            <h3>{{ event.eName }}</h3>
+                            <p>Start : {{ event.eDate ? event.eDate|date('Y-m-d') : '' }}</p>
+                            <p>At {{ event.place }}</p>
+                            <p>{{ event.ticketPrice }} $</p>
+                            <div>
+                                <a class="btn-get-started" href="#" onclick="confirmParticipation({{ event.idEvent }})">Participer</a>
+                            </div>
+                           
+                            <a class="details-link" href="{{ path('app_workshop_index_front', {'idEvent': event.idEvent , 'id_user':id_user}) }}"><i class="bi bi-link-45deg"></i>Workshops</a>
+                              <div id="qr-code-{{ event.idEvent }}" class="event-qr-code"></div>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>No records found</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function confirmParticipation(eventId) {
+            if (confirm("Are you sure you want to participate?")) {
+                var participationUrl = "{{ path('app_event_participation', {'idEvent': 'eventId','id_user' : id_user}) }}".replace('eventId', eventId);
+                window.location.href = participationUrl;
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    {% for event in events %}
+        var qrCode = qrcode(0, 'M');
+        qrCode.addData(JSON.stringify({
+            name: '{{ event.eName }}',
+            startDate: '{{ event.eDate ? event.eDate|date('Y-m-d') : 'Not specified' }}',
+            Place: '{{ event.place}}',
+            points: '{{ event.ticketPrice }} $'
+        }));
+        qrCode.make();
+        document.getElementById('qr-code-{{ event.idEvent }}').innerHTML = qrCode.createImgTag();
+    {% endfor %}
+});
+</script>
+
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+  <a href="{{ path('app_event_pdf') }}">pdf</a>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

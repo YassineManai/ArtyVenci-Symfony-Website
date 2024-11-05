@@ -1,0 +1,45 @@
+
+{% extends 'Home.html.twig' %}
+
+{% block title %}Display Forums{% endblock %}
+{% block navbar %}
+		{% set id_user = idu %}
+		{% if id_user %}
+			<li><a href="{{path('app_product_index',{'id_user': id_user })}}"class="active" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+		{% endif %}
+	{% endblock %}
+{% block body %}
+    <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+            {{form_start(f)}}
+          <table>
+            <tr>
+              <td>{{ form_label(f.title,"Titre du Post :") }}</td>
+              <td>{{ form_widget(f.title) }}</td>
+              <td>{{ form_errors(f.title) }}</td>
+            </tr>
+            <tr>
+              <td>{{ form_label(f.textmessage,"Message :") }}</td>
+              <td>{{ form_widget(f.textmessage) }}</td>
+              <td>{{ form_errors(f.textmessage) }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table> 
+          {{ form_widget(f.submit) }}
+          {{form_end(f)}}
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 5px; /* Decreased padding */
+            background-color: #f9f9f9;
+            position: relative;
+            min-width: 600px;
+            max-width: 600px; /* Added max-width */
+        }
+        .card img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .card h2 {
+            font-size: 2em; /* Decreased font size */
+            margin: 5px 0; /* Decreased margin */
+            font-family: Arial, sans-serif; /* Example font */
+            color: #333; /* Adjust color as needed */
+            padding : 0px 0px 0px 10px;
+        }
+        .card p {
+            font-size: 0.8em; /* Decreased font size */
+            color: grey; /* Changed color to grey */
+            margin: 0; /* Remove margin */
+            padding : 0px 0px 0px 10px;
+        }
+        .card a {
+            display: inline-block;
+            padding: 3px 8px; /* Decreased padding */
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            margin-left: 5px; /* Decreased margin */
+        }
+        .like-container {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 5px; /* Decreased bottom margin */
+            right: 5px; /* Decreased right margin */
+        }
+        .card .date {
+            position: absolute;
+            top: 5px; /* Decreased top margin */
+            right: 5px; /* Decreased right margin */
+            color: grey; /* Changed color to grey */
+            font-size: 0.6em; /* Decreased font size */
+        }
+        .CardHolder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+    </style>
+</head>
+<body>
+<div class="CardHolder">
+    <div class="card">
+        <h2>{{ p.title }}</h2>
+        <p>{{ p.idUser.username }}</p>
+        <br>
+        <p>{{ p.textmessage }}</p>
+        <br>
+        <p class="date">Date: {{ p.timeofcreation| date("d/m/Y H:i:s") }}</p>
+        <div class="like-container">
+            <p>{{ p.likeNumber }}</p>
+            <a href={{path('app_update_post_like_user',{'idp':p.idPost,'idu':idu.idUser} )}}>Like</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

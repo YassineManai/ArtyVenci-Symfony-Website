@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Join | ArtyVenci </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{asset('img/logo.png')}}" type="image/icon type">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'>
+<link rel="stylesheet" href="{{asset('css/style.css')}}" >
+
+</head>
+
+<body>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <div id='stars'></div>
+  <div id='stars2'></div>
+  <div id='stars3'></div>
+
+
+  <body id="particles-js"></body>
+  <div class="animated bounceInDown">
+    <div class="container" style="
+    height: 670px;
+">
+      <span class="error animated tada" id="msg" style="top: 21%;" ></span>
+      <img src="{{asset('img/Closepage.png')}}" alt="ArtyVnci" style="width: 10%;position: absolute;top: 2%;right: 2%;" >
+      <form name="form1"  class="box" onsubmit = "return checkStuff()" action="{{ path('signup2',{'username': 'example_username', 'email': 'example_email'})}}">
+        <img src="{{asset('img/logo.png')}}" alt="ArtyVnci"style="width: 35%;">
+        <h5>Join ArtyVenci</h5>
+           <img src="{{asset('img/pagination1.png')}}" alt="ArtyVnci" style="position: fixed;width: 10%;top: 27%;right: 45%;">
+
+        <input type="text" name="username" placeholder="Username" id="username" autocomplete="off">
+        <input type="text" name="email" placeholder="Email" id="email" autocomplete="off">
+        <input type="password" name="password" placeholder="Passsword" id="password" autocomplete="off">
+        <i class="typcn typcn-eye" id="eye"></i>
+        <input type="password" name="confirmpassword" placeholder="ConfirmPasssword" id="Cpwd" autocomplete="off">
+        <i class="typcn typcn-eye" id="eye1" style="top: 410px "></i>
+
+       
+        <div class="box">
+          <select aria-placeholder="Select your role.." name="role" id="role" style="
+    width: 340px;">
+           <option value="" disabled selected>Select your role</option>
+            <option>Member</option>
+            <option>Artist</option>
+          </select>
+        </div>
+
+
+
+        <input type="submit" value="Next" class="btn2" style="
+    top: 83%;
+">
+      </form>
+
+
+      <a href="{{path('login')}}" class="dnthave">Already Member? Log In</a>
+    </div>
+
+
+  </div>
+  <!-- partial -->
+
+ 
+<script  src="{{asset('js/Signup.js')}}"></script>
+
+</body>
+
+</html>

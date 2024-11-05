@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Product{% endblock %}
+
+{% block body %}
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center">
+        <div class="example-wrapper">
+          <div class="success-icon">✅</div>
+          <h1 class="success-message">Payment was successful!</h1>
+          <a href="{{ path('app_product_index') }}">back to list</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Hero Section -->
+{% endblock %}

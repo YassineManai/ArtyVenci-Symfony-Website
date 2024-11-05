@@ -1,0 +1,156 @@
+{% extends 'Admin.html.twig' %}
+{% block content %}
+<li style="
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+">
+			<div class="left">
+					<h1 style="
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+">Table of Posts of Forum : {{NameForum}}</h1>
+					
+				</div>
+				
+
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+		
+        <tr>
+		    <th style="background:#144CCC;" ></th>
+            <th style="background:#144CCC;">User</th>
+            <th style="background:#144CCC;">Title</th>
+            <th style="background:#144CCC;">Message</th>
+            <th style="background:#144CCC;">Likes</th>
+            <th style="background:#144CCC;">Date</th>
+			<th style="background:#144CCC;" ></th>
+        </tr>
+        </thead>
+
+
+
+
+		
+        <tbody>
+       {% for p in posts %}
+        <tr>
+		<td style=" width: 10px;">  <img src="{{asset('img/post.png')}}"></img></td>
+            <td>{{p.idUser.username}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.textmessage}}</td>
+            <td>{{p.likeNumber}}</td>
+            <td>{{p.timeofcreation| date("d/m/Y H:i:s")}}</td>
+			<td style=" width: 10px;"> 
+				<form method="post" action="{{path('app_delete_post',{id:p.idPost})}}" onsubmit="return confirm('Are you sure you want to delete this Post?');">
+					<button class="btn" style="background-color:transparent;border:0px;">
+						<img src="{{asset('img/deleteUser.png')}}" ></img>
+					</button>
+				</form>
+			</td>
+
+           </tr>
+		    {% endfor %}
+      
+             <tbody>
+	  	
+         </table>
+	
+	             </div>
+            </li>
+
+
+			
+		</main>
+		<!-- MAIN -->
+
+
+
+
+	
+</div>
+	
+	</li> 
+
+
+{% endblock %}
+		{% block path  %} 
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li >
+				            <a href="{{path('ForumsAdmin')}}">
+					            <i class='bx bx-message-square-detail' ></i>
+					        <span class="text">Forums</span>
+				        </a>
+			            </li>   
+                        <li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">{{NameForum}}</a>
+						</li>
+					</ul>
+				</div>
+{% endblock %} 
+{% block sidebar  %} 
+	<section id="sidebar">
+		<a href={{path('Admin')}} class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">ArtyVenci_Admin</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="{{path('Admin')}}">
+					<i class='bx bx-user' ></i>
+					<span class="text">Users</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{path('AdminProds')}}">
+					<i class='bx bxl-product-hunt' ></i>
+					<span class="text">Products</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="{{path('ForumsAdmin')}}">
+					<i class='bx bx-message-square-detail' ></i>
+					<span class="text">Forums</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bx-calendar-event'></i>
+					<span class="text">Events</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bx-edit-alt' ></i>
+					<span class="text">Auction</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href={{path('login')}} class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+{% endblock %}

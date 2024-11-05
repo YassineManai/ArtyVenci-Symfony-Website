@@ -1,0 +1,82 @@
+<style>
+	.card {
+		border: 1px solid #ccc;
+		border-radius: 8px;
+		padding: 16px;
+		margin-bottom: 16px;
+	}
+
+	.card-header {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 12px;
+	}
+
+	.card-header h2 {
+		margin: 0;
+	}
+
+	.card-body p {
+		margin: 0;
+		color: black;
+	}
+
+	.card-body span {
+		display: block;
+		margin-top: 8px;
+		font-size: 0.9em;
+		color: #888;
+	}
+
+	.card-meta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+	.card-meta span:first-child {
+		margin: 0 10px 0 0;
+	}
+	.card-header h2 {
+		color: black;
+	}
+
+	.card-body {
+		text-align: left;
+	}
+
+	.titleButt2 {
+		color: black;
+		margin: 0 10px;
+		text-align: left;
+		padding: 0;
+	}
+</style>
+
+{% for a in auctions %}
+    {% if a.nom == "No records" %}   
+        <h3>No Records</h3>
+    {% else %}
+	<div class="card">
+		<div class="card-header">
+			<div class="container">
+					<div class="wrapper">
+						<img src="{{asset ('img/explore/e1.jpg') }}" alt="explore image" class="banner-image">
+						<h1>
+							{{ a.nom }}</h1>
+						<p>FROM
+							{{ a.prixInitial }}DT
+							<br/>
+							TO
+							{{ a.prixFinal }}DT.</p>
+					</div>
+	
+					<div class="button-wrapper">
+						<div class="button-wrapper">
+							<a href="{{ path('app_auction_show', {'idAuction': a.idAuction , 'id_user':id_user} )  }}" class="btn fill">Show Detail</a>
+						</div>
+
+					</div>
+				</div>
+	</div>
+    {% endif %}
+{% endfor %}

@@ -1,0 +1,19 @@
+<div class="col-lg-6 text-center">
+        {% if posts is empty %}
+          <p>No Records</p>
+        {% else %}
+          {% set firstPost = posts[0] %}
+          
+          {% for p in posts %}
+            {% if (idU is defined and idU != null) %}
+              {% if p.idUser.idUser == idU.idUser %}
+                {% include 'post/MypostTemplate.html.twig' %}
+              {% else %}
+                {% include 'post/postTemplate.html.twig' %}
+              {% endif %}
+            {% else %}
+              {% include 'post/postTemplate.html.twig' %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+</div>

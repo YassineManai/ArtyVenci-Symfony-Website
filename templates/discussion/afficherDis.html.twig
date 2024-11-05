@@ -1,0 +1,160 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}Discussion{% endblock %}
+{% block navbar %}
+   
+   {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}"class="active">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .heading {
+        text-align: center;
+    }
+
+    .search-form {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        width: 70%;
+        max-width: 300px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .search-button {
+        background-color: rgba(39, 167, 118, 0.8);
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+    .search-button:hover {
+        background-color: rgba(39, 167, 118, 1);
+    }
+
+    .discussion-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .discussion-item {
+        border: 2px solid rgba(39, 167, 118, 0.8); /* Bordure plus épaisse */
+        border-radius: 5px;
+        padding: 10px;
+        width: 200px;
+        text-align: center;
+        background-color: rgb(255, 240, 212);
+    }
+
+    .user-info img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .username {
+        font-weight: bold;
+    }
+
+    .create-new-link {
+        width: 150px;
+        display: block;
+        text-align: center;
+        margin: 0 auto 20px;
+        background-color: rgba(39, 167, 118, 0.8);
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        opacity: 0.8;
+    }
+
+    .create-new-link:hover {
+        background-color: rgba(39, 167, 118, 1);
+    }
+
+    .alert {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h1 class="heading">Discussions list</h1>
+
+    <br>
+
+
+        <a href="{{path('discussions_search',{'id_user':id_user})}}" class="create-new-link search-button">Rechercher</a>
+        <a href="{{ path('app_discussion_new_two', { 'id_user': id_user }) }}" class="create-new-link">Create new</a>
+    <br>
+
+    <div id="discussionList" class="discussion-list">
+        <!-- Les discussions seront affichées ici -->
+        {% if discussions is empty %}
+            <div class="alert">
+                Aucune discussion trouvée pour cet utilisateur.
+            </div>
+        {% else %}
+            <div class="discussion-wrapper">
+                {% for discussion in discussions %}
+                    <div class="discussion-item">
+                        {% if discussion.receiver %}
+                            <a href="{{ path('app_discussion_show_messages', {'iddis': discussion.iddis, 'id_user': id_user }) }}">
+                                <div class="user-info">
+                                    {# {% if discussion.receiver.ImageURL %}
+                                    <img src="{{ asset(discussion.receiver.ImageURL) }}" alt="Image de {{ discussion.receiver.username }}">
+                                    {% else %} #}
+                                    <img src="{{ asset('img/discussion/homme.png') }}" alt="Image alternative">
+                                    {# {% endif %} #}
+                                    <p class="username">{{ discussion.receiver.username }}</p>
+                                </div>
+                            </a>
+                        {% else %}
+                            <p class="username"><strong>Destinataire inconnu</strong></p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

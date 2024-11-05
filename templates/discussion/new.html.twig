@@ -1,0 +1,125 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}New Discussion{% endblock %}
+
+{% block navbar %}
+   
+   {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}"class="active">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+
+<style>
+    /* CSS styles */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Make the container full height of the viewport */
+    }
+
+    .discussion-form {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 400px; /* Set a fixed width */
+    }
+
+    .form-container {
+        margin-bottom: 20px;
+    }
+
+    .custom-button {
+        display: inline-block;
+        background-color: rgba(39, 167, 118, 0.8); /* Updated RGBA color */
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .custom-button:hover {
+        background-color: rgba(39, 167, 118, 1); /* Darker color on hover */
+    }
+
+    .custom-button-extremite {
+        margin-right: 10px;
+    }
+
+    .custom-button-retour {
+        text-align: center; /* Center the buttons */
+        margin-top: 20px; /* Add space at the top */
+    }
+
+    .custom-button-retour .button-icon {
+        width: 30px;
+        height: auto;
+        margin-right: 10px;
+    }
+
+    /* Improved select list */
+    select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    /* Save button */
+    .save-button {
+        display: inline-block;
+        background-color: rgba(39, 167, 118, 0.8);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        border: none; /* Remove border */
+        cursor: pointer;
+        margin-right: 10px; /* Add margin for spacing */
+    }
+
+    .save-button:hover {
+        background-color: rgba(39, 167, 118, 1);
+    }
+
+ 
+</style>
+
+<div class="container">
+
+    <div class="discussion-form">
+    <br>
+    <h1 style="color: rgba(39, 167, 118, 0.8); text-align: center;">Create New Discussion</h1>
+    <br>
+        <form action="{{ path('app_discussion_new_two' , { 'id_user': id_user })}}" method="post">
+            <div class="form-container">
+                {{ include('discussion/_form.html.twig') }}
+                <br>
+                <button style="display: block; margin: 0 auto;" class="custom-button save-button" type="submit">Save</button>
+            </div>
+        </form>
+        <div class="custom-button-retour">
+            <a href="{{ path('app_discussion_index' , { 'id_user': id_user })}}" class="custom-button">
+                <img src="{{ asset('img/discussion/bouton-retour.png') }}" alt="Retour aux discussions" class="button-icon">
+                Back to Discussions
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

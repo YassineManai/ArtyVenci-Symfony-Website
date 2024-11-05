@@ -1,0 +1,110 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+ {% block navbar %}
+   
+    {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}"class="active" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        
+    {% endif %}
+    {% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensure each card takes full height */
+        }
+
+        .card-body {
+            flex-grow: 1; /* Allow card body to grow to take remaining space */
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Product index</h1>
+             {% if id_user %}
+            <a href="{{ path('app_product_new',{ 'id_user': id_user }) }}" class="btn btn-success mb-4">Create new</a>
+            <a href="{{ path('app_orderproduct_index',{ 'id_user': id_user }) }}" class="btn btn-success mb-4">View Orders</a>
+            <a href="{{ path('app_product_index',{ 'id_user': id_user }) }}" class="btn btn-secondary mb-4" >All Products</a>
+            <a href="{{ path('app_product_forsale',{ 'id_user': id_user }) }}" class="btn btn-primary mb-4" >For Sale</a>
+            <a href="{{ path('app_product_notforsale',{ 'id_user': id_user }) }}" class="btn btn-primary mb-4" >Not For Sale</a>
+{% endif %}
+        </div>
+    </div>
+
+     <div class="row mb-4">
+        <div class="col-md-6">
+            <select class="form-select" id="searchBy">
+                <option value="title">Search by Title</option>
+                <option value="description">Search by Description</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" id="searchText" placeholder="Enter search term">
+                <button class="btn btn-primary" id="searchButton">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="productList">
+        {% for product in products %}
+        <div class="col-md-4 mb-4" >
+            <div class="card">
+                {% set imagePath = product.productimage %}
+                {% set parts = imagePath|split('/') %}
+                {% set relativeImagePath = '/uploads/' ~ parts|last %}
+                <img src="{{ relativeImagePath }}" class="card-img-top" alt="{{ product.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text">For Sale: {{ product.forsale ? 'Yes' : 'No' }}</p>
+                    <p class="card-text">Price: {{ product.price }}</p>
+                    <p class="card-text">Creation Date: {{ product.creationdate }}</p>
+                    <a href="{{ path('app_product_show', {'idProduct': product.idProduct,'id_user': id_user }) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('app_product_edit', {'idProduct': product.idProduct,'id_user': id_user }) }}" class="btn btn-secondary">Edit</a>
+                    {% if product.forsale %}
+                        <a href="{{ path('app_orderproduct_new', {'idProduct': product.idProduct,'id_user': id_user }) }}" class="btn btn-success">Order</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-12">
+            <p>No records found</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    document.getElementById("searchButton").addEventListener("click", function() {
+        var searchBy = document.getElementById("searchBy").value;
+        var searchText = document.getElementById("searchText").value;
+        
+        // Construct the URL with searchBy and searchText
+        var url = "{{ path('app_search',{ 'id_user': id_user }) }}?searchby=" + searchBy + "&searchtext=" + searchText;
+        
+        window.location.href = url;
+    });
+</script>
+{% endblock %}
+

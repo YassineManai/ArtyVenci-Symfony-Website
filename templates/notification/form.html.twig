@@ -1,0 +1,15 @@
+{# templates/notification/form.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Envoyer une notification</title>
+</head>
+<body>
+    <h1>Envoyer une notification</h1>
+    <form method="post" action="{{ path('send_notification') }}">
+        <button type="submit">Envoyer une notification</button>
+    </form>
+</body>
+</html>

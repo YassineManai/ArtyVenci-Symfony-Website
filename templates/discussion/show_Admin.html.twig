@@ -1,0 +1,38 @@
+
+
+{% extends 'Admin.html.twig' %}
+
+{% block title %}Discussion{% endblock %}
+
+
+
+{% block body %}
+    <h1>Discussion</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Iddis</th>
+                <td>{{ discussion.iddis }}</td>
+            </tr>
+            <tr>
+                <th>Receiver</th> 
+                <td>{{ discussion.receiver.idUser }}</td> 
+            </tr>
+            <tr>
+                <th>Idsender</th>
+                <td>{{ discussion.idsender }}</td>
+            </tr>
+            <tr>
+                <th>Sig</th>
+                <td>{{ discussion.sig }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {#<a href="{{ path('app_discussion_index') }}">back to list</a>#}
+
+    {#<a href="{{ path('app_discussion_edit', {'iddis': discussion.iddis}) }}">edit</a>#}
+
+    {{ include('discussion/_delete_form_Admin.html.twig') }}
+{% endblock %}

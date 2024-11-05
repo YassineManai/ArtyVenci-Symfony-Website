@@ -1,0 +1,119 @@
+ {% extends 'Home.html.twig' %}
+
+{% block title %}Workshops index{% endblock %}
+ {% block navbar %}
+   
+      
+    {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+		<li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}"class="active">Events</a></li> 
+         <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+    {% endif %}
+    {% endblock %}
+
+
+{% block body %}
+ <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+         
+<div id="pricing" class="pricing">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="title">
+                                <h2>Our<strong class="black"> Workshops for {{event.eName}}</strong></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    {% for w in workshops %}
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="pricing_box">
+                               <img src="{{asset(w.image)}}" width="200" height="250" />
+                                <h3>{{w.title}}</h3>
+                               
+                                <p> {{ w.details }}</p>
+                               
+                                <div>
+                              
+                            </div>
+                        </div>
+                      {% else %}
+        
+               <p>no records found</p>
+          
+        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block content %}
+
+ <div id="pricing" class="pricing">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="title">
+                                <h2>Our<strong class="black"> Workshops for {{event.eName}}</strong></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    {% for w in workshops %}
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="pricing_box">
+                               <img src="{{asset(w.image)}}" width="200" height="250" />
+                                <h3>{{w.title}}</h3>
+                               
+                                <p> {{ w.details }}</p>
+                               
+                                <div>
+                              
+                            </div>
+                        </div>
+                      {% else %}
+        
+               <p>no records found</p>
+          
+        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+            {% endblock %}

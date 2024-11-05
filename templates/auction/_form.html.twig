@@ -1,0 +1,27 @@
+{# templates/auction/_form.html.twig #}
+{#<form method="post" action="{{ path('app_auction_new') }}">
+    <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
+        <div class="col-12">
+            <label for="nom" class="form-label">Nom <span class="text-danger">*</span></label>
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'id': 'nom'}}) }}
+            <label for="nom" class="form-label">Date lancement <span class="text-danger">*</span></label>
+            {{ form_widget(form.dateLancement, {'attr': {'class': 'form-control', 'id': 'nom'}}) }}
+            <label for="nom" class="form-label">date Cloture <span class="text-danger">*</span></label>
+            {{ form_widget(form.dateCloture, {'attr': {'class': 'form-control', 'id': 'nom'}}) }}
+            <label for="nom" class="form-label">prix initial <span class="text-danger">*</span></label>
+            {{ form_widget(form.prixInitial, {'attr': {'class': 'form-control', 'id': 'nom'}}) }}
+            <label for="nom" class="form-label">produit <span class="text-danger">*</span></label>
+            {{ form_widget(form.idProduit, {'attr': {'class': 'form-control', 'id': 'nom'}}) }}
+
+        </div>
+       
+        <!-- Ajoutez les autres champs de formulaire de manière similaire -->
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Enregistrer</button>
+</form>
+#}
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <!--<button class="btn">{{ button_label|default('Save') }}</button>-->
+{{ form_end(form) }}

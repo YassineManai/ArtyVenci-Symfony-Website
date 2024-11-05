@@ -1,0 +1,56 @@
+/* Styles for the discussion list */
+.discussion-list {
+    margin: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+/* Styles for each discussion item */
+.discussion-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.discussion-item h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Paragraph styles */
+.discussion-item p {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* Link styles */
+.discussion-item a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* Button styles */
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .discussion-list {
+        margin: 10px;
+    }
+    .discussion-item {
+        padding: 8px;
+    }
+}

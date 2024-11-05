@@ -1,0 +1,92 @@
+{% extends 'Home.html.twig' %}
+
+{% block title %}Display Posts{% endblock %}
+{% block navbar %}
+		{% set id_user = idu.idUser %}
+		{% if id_user %}
+			<li><a href="{{path('app_product_index',{'id_user': id_user })}}"class="active" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}">Auction</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}">Messenger</a></li> 
+        <li><a href="{{ path('app_event_index_front', { 'id_user': id_user }) }}">Events</a></li> 
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+		{% endif %}
+	{% endblock %}
+{% block body %}
+<style>
+  .DisplayTable  {
+    text-align: left; 
+    padding : 10px;
+    margin : 10px;
+  }
+  th,td {
+    padding-right: 15px;
+  }
+  .fcc-btn {
+    background-color: lightblue;
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position : absolute;
+    right : 1em;
+  }
+  .fcc-btn-pdf {
+    background-color: lightblue;
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position : absolute;
+    right : 1em;
+    top :13em;
+  }
+
+</style>
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+        {% if posts is empty %}
+          <p>No Records</p>
+          <a class="fcc-btn" href="{{path('app_add_post_diff_user&forum',{'idf':idf,'idu':idu.idUser})}}">+</a>
+        {% else %}
+          {% set firstPost = posts[0] %}
+          {% if (idu is defined and idu != null) %}
+            <a class="fcc-btn" href="{{path('app_add_post_diff_user&forum',{'idf':firstPost.idForum.getIdForum,'idu':idu.idUser})}}">+</a>
+            {% else %}
+            <a class="fcc-btn" href="{{path('app_add_post_diff_forum',{'idf':firstPost.idForum.getIdForum})}}">+</a>
+          {% endif %}
+          
+          <a class="fcc-btn-pdf" href="{{path('app_pdf',{'id':firstPost.idForum.getIdForum,'idu':idu.idUser})}}">PDF</a>
+        {% endif %}
+        </div>
+      </div>
+      <div>
+        {% for p in posts %}
+          {% if (idu is defined and idu != null) %}
+            {% if p.idUser.idUser == idu.idUser %}
+              {% include 'post/MypostTemplate.html.twig' %}
+            {% else %}
+              {% include 'post/postTemplate.html.twig' %}
+            {% endif %}
+          {% else %}
+            {% include 'post/postTemplate.html.twig' %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div>
+      {{ knp_pagination_render(posts) }}
+    </div>
+  </section><!-- End Hero Section -->
+{% endblock %}

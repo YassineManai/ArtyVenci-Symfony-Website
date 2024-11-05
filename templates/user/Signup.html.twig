@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Join | ArtyVenci </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./images/logo.png" type="image/icon type">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css'>
+<link rel="stylesheet" href="{{asset('css/style.css')}}" >
+
+</head>
+
+<body>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <div id='stars'></div>
+  <div id='stars2'></div>
+  <div id='stars3'></div>
+
+
+  <body id="particles-js"></body>
+  <div class="animated bounceInDown">
+    <div class="container">
+      <span class="error animated tada" id="msg"></span>
+      <form name="form1" class="box" onsubmit="return checkStuff()">
+        <img src="{{asset('img/logo.png')}}" alt="ArtyVnci"style="width: 35%;">
+        <h5>Join ArtyVenci</h5>
+
+        <input type="text" name="username" placeholder="Username" autocomplete="off">
+        <input type="text" name="email" placeholder="Email" autocomplete="off">
+
+        <input type="password" name="password" placeholder="Passsword" id="pwd" autocomplete="off">
+        <i class="typcn typcn-eye" id="eye"></i>
+        <input type="password" name="confirmpassword" placeholder="ConfirmPasssword" id="Cpwd" autocomplete="off">
+        <i class="typcn typcn-eye" id="eye1" style="top: 410px "></i>
+
+       
+        <div class="box">
+          <select aria-placeholder="Select your role.." name="role">
+           <option value="" disabled selected>Select your role</option>
+            <option>Member</option>
+            <option>Artist</option>
+        
+          </select>
+        </div>
+
+
+
+        <input type="submit" value="Next" class="btn2">
+      </form>
+
+
+      <a href="{{path('login')}}" class="dnthave">Already Member? Log In</a>
+    </div>
+
+
+  </div>
+  <!-- partial -->
+ 
+  <script src='https://cldup.com/S6Ptkwu_qA.js'></script><script  src="{{asset('js/script.js')}}"></script>
+
+</body>
+
+</html>

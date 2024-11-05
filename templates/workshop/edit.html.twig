@@ -1,0 +1,23 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit{% endblock %}
+
+{% block content %}
+<div class="row">
+						<div class="col-xl-6 col-xxl-5 d-flex">
+							<div class="w-100">
+								<div class="row">
+						
+    <h1>Edit Workshop</h1>
+
+    {{ include('workshop/_form.html.twig', {'button_label': 'Update'}) }}
+
+   
+    {{ include('workshop/_delete_form.html.twig') }}
+      </div>
+    </div>
+   
+    </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,289 @@
+{% extends 'Admin.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block sidebar  %} 
+	<section id="sidebar">
+		<a href={{path('Admin')}} class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">ArtyVenci_Admin</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a href="{{path('Admin')}}">
+					<i class='bx bx-user' ></i>
+					<span class="text">Users</span>
+				</a>
+			</li>
+			<li >
+				<a href="{{path('AdminProds')}}">
+					<i class='bx bxl-product-hunt' ></i>
+					<span class="text">Products</span>
+				</a>
+			</li>
+			<li  >
+				<a href="{{path('ForumsAdmin')}}">
+					<i class='bx bx-message-square-detail' ></i>
+					<span class="text">Forums</span>
+				</a>
+			</li>
+			<li class="active" >
+			<a href="{{path('app_event_index')}}">
+					<i class='bx bx-calendar-event'></i>
+					<span class="text">Events</span>
+				</a>
+			</li>
+			<li >
+				<a href="{{ path('AdminAuc') }}">
+
+					<i class='bx bx-edit-alt' ></i>
+					<span class="text">Auction</span>
+				</a>
+			</li>
+			<li  >
+				<a href="{{ path('app_list_disc') }}">
+					<i class='bx bx-chat'></i>
+					<span class="text">Discussion</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href={{path('login')}} class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+{% endblock %}
+
+{% block content %}
+<li style="
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+">
+<div class="head-title">
+			<div class="left">
+					<h1 style="
+                                font-size: 30px;
+                                font-weight: 600;
+                                margin-bottom: 10px;
+                                color: var(--dark);
+                            ">Table of Forums</h1>
+					
+				</div>
+                <form action="{{ path('app_event_search') }}" method="POST">
+				<div class="form-input" style="display: flex;align-items: center;height: 36px;width: 500px;;
+">
+					<input type="search" name="search" placeholder="Search..." style="flex-grow: 1;padding: 0 16px;height: 100%;border: none;background: var(--grey);border-radius: 36px 0 0 36px;outline: none;width: 100%;color: var(--dark);
+">
+					<buttontype="submit" class="search-btn" style=" width: 36px; height: 100%; display: flex; justify-content: center; align-items: center; background: var(--blue); color: var(--light); font-size: 18px; border: none; outline: none; border-radius: 0 36px 36px 0;
+    cursor: pointer;
+"><i class='bx bx-search'style="
+   
+" ></i></button>
+				</div>
+			</form>
+
+       
+               <a href="{{ path('app_event_new')}}">Create new</a>
+                </div>
+              
+				
+
+<div class="table-wrapper">
+    <table class="fl-table" id="userTable">
+        <thead>
+		
+        <tr>
+		    
+            <th style="background:#144CCC;">Name</th>
+            <th style="background:#144CCC;">Place</th>
+            <th style="background:#144CCC;">Date</th>
+            <th style="background:#144CCC;">Price</th>
+			<th style="background:#144CCC;" > Image </th>
+            <th style="background:#144CCC;" > Action </th>
+        </tr>
+        </thead>
+
+
+
+
+		
+        <tbody>
+       {% for event in events %}
+                            <tr>
+                                <td><a href="{{ path('app_workshop_index', {'idEvent': event.idEvent}) }}">{{ event.eName }}</a></td>
+                                <td class="d-none d-xl-table-cell">{{ event.place }}</td>
+                                <td class="d-none d-xl-table-cell">{{ event.eDate ? event.eDate|date('Y-m-d') : '' }}</td>
+                                <td><span class="badge bg-success">{{ event.ticketPrice }} $</span></td>
+                                <td class="d-none d-md-table-cell"><img src="{{ asset(event.image) }}" width="100" height="150" /></td>
+                                <td>
+                                    <a href="{{ path('app_event_edit', {'idEvent': event.idEvent}) }}">edit</a>
+                                    <a href="{{ path('app_workshop_new', {'idEvent': event.idEvent}) }}">Add Workshop</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+        </tbody>
+	</table>
+</div>
+    
+	<div class="head-title">
+			<div class="left">
+					<h1 style="
+                                font-size: 30px;
+                                font-weight: 600;
+                                margin-bottom: 10px;
+                                color: var(--dark);
+                            ">Event Statistic</h1>
+					
+			</div>
+               
+    </div>
+        <div class="head-title">
+			<div class="left">
+					                        <canvas style="margin-top: 40px;display: block;box-sizing: border-box;height: 400px;width: 400px;margin-left: 200px;" id="stat1"></canvas>
+
+					
+			</div>
+                                    <canvas style="margin-top: 40px;display: block;box-sizing: border-box;height: 400px;width: 400px;margin-right: 200px;" id="stat2"></canvas>
+
+               
+    </div>
+	           
+                
+           
+		
+             
+                   
+                  
+      
+
+      
+            </li>
+
+
+			
+		</main>
+		<!-- MAIN -->
+        
+
+
+
+
+	
+</div>
+	
+	</li> 
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.css" integrity="sha512-BrXUJgxzXt4hYFhwL52b5XvIoU3N8rFn1K9MfocvzULUHhtUOjXYXH3I/RqRmDd6PA1CrsAmxiZ2HQcyD1VwOQ==" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Bar chart
+        var ctx1 = document.getElementById('stat1').getContext('2d');
+        var labels1 = [];
+        var data1 = [];
+
+        {% for e in events %}
+            labels1.push('{{ e.eName }}');
+            data1.push({{ e.ticketPrice }});
+        {% endfor %}
+
+        var chart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: labels1,
+                datasets: [{
+                    label: 'Price Per Event',
+                    backgroundColor: 'rgba(52, 152, 219, 0.8)',
+                    borderColor: 'rgba(52, 152, 219, 1)',
+                    borderWidth: 1,
+                    data: data1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true
+						
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: '#bdc3c7'
+                        },
+                        grid: {
+                            color: '#34495e'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#bdc3c7'
+                        },
+                        grid: {
+                            color: '#34495e'
+                        }
+                    }
+                },
+                // Adjust size
+                responsive: false,
+                maintainAspectRatio: false,
+                aspectRatio: 1
+            }
+        });
+
+        // Pie chart
+        var ctx2 = document.getElementById('stat2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Events', 'Workshops'],
+                datasets: [{
+                    backgroundColor: ['#3498db', '#2ecc71'],
+                    borderColor: '#2c3e50',
+                    borderWidth: 1,
+                    data: [{{ events|length }}, {{ workshops|length }}]
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Events vs Workshops',
+                        color: '#000000'
+                    },
+                    legend: {
+                        labels: {
+                            color: '#000000'
+                        }
+                    }
+                },
+                // Adjust size
+                responsive: false,
+                maintainAspectRatio: false,
+                aspectRatio: 1
+            }
+        });
+    </script>
+{% endblock %}

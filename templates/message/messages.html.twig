@@ -1,0 +1,246 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}{{ discussion.receiver.username }}{% endblock %}
+
+{% block navbar %}
+   
+    {% if id_user %}
+	    <li><a href="{{path('app_product_index',{'id_user': id_user })}}" >Gallery</a> 
+        <li><a href="{{path('app_lists_forum_user',{'idu': id_user })}}" >Forums</a>
+        <li><a href="{{path('app_auction_index',{ 'id_user': id_user })}}" >Auction</a></li>
+        <li><a href="{{ path('Profile', { 'id_user': id_user }) }}">Profile</a></li>
+        <li><a href="{{ path('app_discussion_index', { 'id_user': id_user }) }}"class="active" >Messenger</a></li> 
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 15px;
+            word-wrap: break-word;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .sender-message {
+            background-color: rgba(39, 167, 118, 0.8);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        .receiver-message {
+            background-color: rgba(51, 109, 125, 0.8);
+            color: white;
+            align-self: flex-start;
+            margin-right: 20px;
+        }
+
+        .message-content {
+            max-width: 300px;
+        }
+
+        .message p {
+            margin: 5px 0;
+        }
+
+        .message p em {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .sender-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .delete-button {
+            margin-left: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%);
+        }
+
+        .delete-button img {
+            width: 20px;
+            height: auto;
+        }
+
+        .custom-button {
+            background-color: rgba(39, 167, 118, 0.8);
+            color: white;
+            margin-right: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .title-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-wrapper {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            width: 600px;
+            height: 80px;
+            margin: auto;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .form-control {
+            width: 80%;
+            max-width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            height: auto;
+            resize: none;
+            font-size: 14px;
+        }
+
+        .custom-button-envoyer {
+            width: 150px;
+            height: 60px;
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+
+        .custom-button-retour {
+            margin-right: auto;
+        }
+
+        .custom-button-extremite {
+            margin-left: auto;
+        }
+
+        .image_de_receiver {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h1 class="title-container">{{ discussion.receiver.username }}</h1>
+    <br>
+    <br>
+    <a href="{{ path('app_discussion_index' , { 'id_user': id_user })}}" class="custom-button custom-button-extremite custom-button-retour">
+        <img src="{{ asset('img/discussion/bouton-retour.png') }}" alt="Retour aux discussions" style="width: 50px; height: auto;">
+    </a>
+    <a href="{{ path('app_discussion_show', {'iddis': discussion.iddis, 'id_user': id_user }) }}" class="custom-button">Supprimer</a>
+    <a href="{{ path('app_discussion_signal', {'iddis': discussion.iddis , 'id_user': id_user }) }}" class="custom-button">Signaler</a>
+    <br>
+    <br>
+    <br>
+    <div class="message-container">
+{% set currentUserId = id_user %}
+{% for message in messages %}
+    {% if message.idsender is not null and message.idsender == currentUserId %}
+        <div class="message sender-message">
+            <div style="display: flex; align-items: center;">
+                <p>{{ message.content }}</p>
+                <p><em>Envoyé le {{ message.datasent ? message.datasent|date('Y-m-d H:i:s') : '' }}</em></p>
+            </div>
+            <img src="{{ asset('img/discussion/homme.png') }}" alt="Image de {{ discussion.receiver.username }}" class="sender-img">
+        </div>
+        <button class="delete-button">
+            <a href="{{ path('app_message_delete', {'idmsg': message.idmsg ,'id_user': id_user }) }}" class="custom-button"><img src="{{ asset('img/discussion/annuler.png') }}" alt="Supprimer" style="width: 20px; height: auto;"></a>
+        </button>
+    {% elseif message.idsender is not null %}
+        <div class="message receiver-message">
+            <img src="{{ asset('img/discussion/femme.png') }}" alt="Image de {{ discussion.receiver.username }}" class="image_de_receiver">
+            <div class="message-content">
+                <p>{{ message.content }}</p>
+                <p><em>Envoyé le {{ message.datasent ? message.datasent|date('Y-m-d H:i:s') : '' }}</em></p>
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    <p>Aucun message trouvé pour cette discussion.</p>
+{% endfor %}
+
+
+    </div>
+
+    <div class="form-container">
+        <div class="form-wrapper">
+            <!-- Début du formulaire -->
+            {{ form_start(form, {'attr': {'class': 'message-form'}}) }}
+                <div class="form-group">
+                    {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 3}, 'label': false}) }}
+                    <button type="button" id="emoji-picker-button" class="custom-button custom-button-envoyer">        
+                        <img src="{{ asset('img/discussion/emoji.png') }}" alt="emojis" style="width: 35px; height: auto;">
+                    </button>
+                    <button type="submit" class="custom-button custom-button-envoyer">        
+                        <img src="{{ asset('img/discussion/envoyer.png') }}" alt="Envoyer" style="width: 35px; height: auto;">
+                    </button>
+                </div>
+            {{ form_end(form) }}
+            <!-- Fin du formulaire -->
+        </div>
+    </div>
+
+<script type="module" src="public/js/emoji.js"></script>
+    <script>
+        const button = document.querySelector('#emoji-picker-button');
+        const picker = new EmojiPicker.default();
+        picker.on('emoji', emoji => {
+            document.querySelector('.form-control').value += emoji;
+        });
+        button.addEventListener('click', () => {
+            picker.togglePicker(button);
+        });
+    </script>
+
+{% endblock %}
